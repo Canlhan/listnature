@@ -1,0 +1,66 @@
+
+.text{
+    color:white;
+   align-items: center;
+}
+.hnav{
+   height: 70px;
+   background-color: #2424A3;
+}
+.home{
+    height: 100vh;
+    background-color: #040730;
+}
+
+.login{
+    
+    margin:auto;
+    padding: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loginbtn{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.colorwhite{
+    color:white;
+}
+.overflowhidden{
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.logo{
+    margin-right: 5px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.downloadbtn{
+    border-radius: 25px;
+    background-color: rgb(175, 198, 205);
+    width: 10.5rem;
+    color: white;
+    
+}
+.downloadbtn:hover{
+    background-color: aliceblue;
+}
+.tdbold{
+    font-weight: bold;
+}
+.linkdecoration{
+    text-decoration: none;
+    color: white;
+}
+.linkdecoration:hover{
+    text-decoration: none;
+    color: white;
+}
+.mrgtop{
+    margin-top: 5px;
+}
