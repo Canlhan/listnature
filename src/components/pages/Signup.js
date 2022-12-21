@@ -1,17 +1,72 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import Usepostdata from "../../customhooks/Usepostdata";
+import { useForm } from "react-hook-form";
+import AuthContext from "../../store/auth-content";
 
 const Signup = () => {
+  const navigate=useNavigate();
+ 
+  const login=localStorage.getItem("login");
 
-    const navigate=useNavigate();
+ 
 
-    const gotologin=()=>{
+ 
+  
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
-        navigate("/");
+  const authctn=useContext(AuthContext);
+
+
+  const [addeduser,setUser]=useState({url:"",object:{}});
+
+  
+  const [isadd,setadd]=useState(false);
+
+
+  
+
+    const result=Usepostdata(addeduser);
+     
+  
+  
+   if(result){
+      navigate("/home");
+     }
+   
+  
+  
+  
+
+  const onsubmit=(data)=>{
+
+
+
+
+        console.log(data);
+        setUser({url:"https://localhost:44374/api/users/add",object:{...data,roles:'customer'}});
+      
+        setadd(true);
+       
+        localStorage.setItem("token","customer");
+        localStorage.setItem("login",true);
+        authctn.toke="customer";
+        
+
     }
+    if(login)
+    {
+      return <Navigate to="/home" replace/>
+    }
+
+
+   
   return (
     <>
+    
       <div className="container mt-5">
+
+
         <div className="row h-25 ">
           <div className="col text-center  my-auto  ">
             <h5 style={{ color: "white" }}> Welcome to listeNature </h5>
@@ -19,58 +74,70 @@ const Signup = () => {
         </div>
 
         <div className="row w-100 text    m-auto p-auto ">
+        
           <div className="login">
-            <form className="w-25 ">
+            <form className="w-25 " onSubmit={handleSubmit(onsubmit)}>
               <div class="form-group ">
-                <label for="exampleInputEmail1">Name</label>
+                <label for="2">Name</label>
                 <input
-                  type="email"
+                  type="default"
                   class="form-control"
-                  id="exampleInputEmail1"
+                  id="2"
                   aria-describedby="emailHelp"
                   placeholder="Name"
+                  
+                  {...register("firstName")}
                 />
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Surname</label>
+                <label for="3">Surname</label>
                 <input
-                  type="password"
+                  type="default"
                   class="form-control"
-                  id="exampleInputPassword1"
+                  id="3"
                   placeholder="Surname"
-                />
+                     
+                  {...register("lastName")}          
+                    />
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Email</label>
+                <label for="4">Email</label>
                 <input
-                  type="password"
+                  type="default"
                   class="form-control"
-                  id="exampleInputPassword1"
+                  id="5"
                   placeholder="Email"
+                  {...register("email")}
+                  
                 />
               </div>
               
               <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
+                <label for="6">Password</label>
                 <input
                   type="password"
                   class="form-control"
-                  id="exampleInputPassword1"
+                  id="6"
                   placeholder="Password"
+                  {...register("password")}
+                 
+
                 />
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1"> Confirm Password</label>
+                <label for="7"> Confirm Password</label>
                 <input
                   type="password"
                   class="form-control"
-                  id="exampleInputPassword1"
+                  id="7"
                   placeholder="Confirm Password"
+                  
+                 
                 />
               </div>
 
               <div className="loginbtn ">
-                <button onClick={gotologin} type="submit" class="btn bg-primary ">
+                <button  type="submit" class="btn bg-primary ">
                   Sign Up
                 </button>
               </div>

@@ -1,14 +1,73 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Navigate, useNavigate } from "react-router-dom";
+import Usepostdata from "../../customhooks/Usepostdata";
+import AuthContext from "../../store/auth-content";
 
 const Administratorlogin = () => {
 
+    
+
+   
+    const loginstor=localStorage.getItem("login");
     const navigate=useNavigate();
+ 
+    const login=localStorage.getItem("adminlogin");
+    
+    const [isauth,setAuth]=useState(true);
+   
+  
+   
+    
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  
+    const authctn=useContext(AuthContext);
+  
+  
+    const [addeduser,setUser]=useState({url:"",object:{}});
+  
+    
+   
+  
+  
+    
+  
+      const result=Usepostdata(addeduser);
 
-    const gotoadmindash=()=>{
+      console.log(result);
 
-        navigate("/home")
-    }   
+      if(result.success){
+        
+            navigate("/home");
+        
+       }
+       else{
+              
+       }
+
+    
+
+    const onsubmit=(data)=>{
+
+
+
+
+        console.log(data);
+        setUser({url:"https://localhost:44374/api/auths/login",object:{...data}});
+      
+       
+       setAuth(false);
+        localStorage.setItem("token","admin");
+        localStorage.setItem("adminlogin",true);
+        authctn.toke="admin";
+        
+
+    }
+
+    if(login)
+    {
+      return <Navigate to="/home" replace/>
+    }
 
   return (
     <>
@@ -19,7 +78,7 @@ const Administratorlogin = () => {
 
         <div className="row w-100 text    m-auto p-auto ">
           <div className="login">
-            <form className="w-25 ">
+            <form className="w-25 " onSubmit={handleSubmit(onsubmit)}>
               <div class="form-group ">
                 <label for="exampleInputEmail1">Email address</label>
                 <input
@@ -28,6 +87,7 @@ const Administratorlogin = () => {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
+                  {...register("email")}
                 />
               </div>
               <div class="form-group">
@@ -37,11 +97,12 @@ const Administratorlogin = () => {
                   class="form-control"
                   id="exampleInputPassword1"
                   placeholder="Password"
+                  {...register("password")}
                 />
               </div>
 
               <div className="loginbtn ">
-                <button onClick={gotoadmindash} type="submit" class="btn bg-primary ">
+                <button  type="submit" class="btn bg-primary ">
                   Submit
                 </button>
               </div>

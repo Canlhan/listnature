@@ -1,14 +1,79 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form';
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import Usefetchdata from '../../customhooks/Usefetchdata';
+import Usepostdata from '../../customhooks/Usepostdata';
+import AuthContext from '../../store/auth-content';
+import UserContext from '../../store/usercontext';
 
 const Login = () => {
 
+    const usercont=useContext(UserContext);
+
+    const loginstor=localStorage.getItem("login");
     const navigate=useNavigate();
+ 
+    const login=localStorage.getItem("login");
+    
+    const [isauth,setAuth]=useState(true);
+   
+  
+   
+    
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  
+    const authctn=useContext(AuthContext);
+  
+  
+    const [addeduser,setUser]=useState({url:"",object:{}});
+  
+    
+   
+  
+  
+    
+  
+      const result=Usepostdata(addeduser);
 
-    const gotohome=()=>{
+      console.log(result);
 
-        navigate("/home");
+      useEffect(()=>{
+
+        if(result.success){
+            console.log(result.data);
+            usercont.addUser(result.data);
+            localStorage.setItem("login",true);
+            navigate("/home");
+        
+       }
+      },[result,addeduser])
+        
+       
+
+    
+
+    const onsubmit=(data)=>{
+
+
+
+
+        console.log(data);
+        setUser({url:"https://localhost:44374/api/auths/login",object:{...data}});
+      
+       
+       setAuth(false);
+        localStorage.setItem("token","customer");
+       
+        authctn.toke="customer";
+        
+
     }
+
+    if(login)
+    {
+      return <Navigate to="/home" replace/>
+    }
+
   return (
    <>
    <div className=' container  h-100    p-auto  '>
@@ -17,26 +82,31 @@ const Login = () => {
 
             <div className='col text-center  my-auto  '>
 
-                <h5 style={{color:"white"}}> Welcome to listeNature </h5>
+                {
+                   isauth ? <h5 style={{color:"white"}}> Welcome to listeNature </h5>:<h5 style={{color:"white"}}> giriş bilgilernizi kontrol ediniz</h5>
+                }
+                
             </div>
         </div>
 
         
         <div className='row w-100 text    m-auto p-auto '>
                     <div className='login'>
-                    <form className='w-25 '>
+                    <form className='w-25 ' onSubmit={handleSubmit(onsubmit)}>
                                 <div class="form-group ">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+                                     {...register("email")}/>
                                 
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                                    {...register("password")}/>
                                 </div>
                             
                             <div className='loginbtn '>
-                                    <button onClick={gotohome} type="submit" class="btn bg-primary ">Submit</button>
+                                    <button  type="submit" class="btn bg-primary ">Submit</button>
                             </div>
                                 
                     </form>    

@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Login from './Login'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -15,12 +15,22 @@ import OwnedRingtones from './OwnedRingtones';
 import UserDetail from './UserDetail';
 import Navbar from '../components/Navbar';
 import AdminDash from './AdminDash';
+import AuthContext from '../../store/auth-content';
+import { Navigate } from 'react-router-dom';
 
 
 
 const Home = () => {
 
-  const [isAdmin,setAdmin]=useState(true);
+ 
+
+  const auth=useContext(AuthContext);
+  const isAdmin=localStorage.getItem("token");
+  console.log(isAdmin);
+
+    
+
+  
   return (
     <>
     
@@ -34,11 +44,11 @@ const Home = () => {
         <div className='row d-flex '>
 
           <div className='col'>
-              <Ringtonecard col={isAdmin?2:1}/>
+              <Ringtonecard col={isAdmin=="customer"?2:1}/>
           </div>
           
           {
-              isAdmin && <AdminDash/>
+              isAdmin=="admin" && <AdminDash/>
           }
         </div>
           

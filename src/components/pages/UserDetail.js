@@ -1,10 +1,25 @@
 
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { BiPencil } from "react-icons/bi";
+import { Navigate } from 'react-router-dom';
+import UserContext from '../../store/usercontext';
 import Navbar from '../components/Navbar';
 
-const UserDetail = (props) => (
+const UserDetail = (props) =>{
+
+    const userCtx=useContext(UserContext);
+
+    const login=localStorage.getItem("login");
+    
+
+    if(!login){
+
+        return <Navigate to="/" replace/>
+    }
+
+return (
+
     <>
 
        
@@ -26,25 +41,25 @@ const UserDetail = (props) => (
                                 
                                 <tr>
                                     <td className='tdbold'>Name:</td>
-                                    <td>Can <BiPencil/></td>
+                                    <td>{userCtx.firstName} <BiPencil/></td>
                                    
                                    
                                 </tr>
                                 <tr>
                                     <td className='tdbold'>Surname: </td>
-                                    <td> İlhan <BiPencil/></td>
+                                    <td> {userCtx.lastName} <BiPencil/></td>
                                     
                                     
                                 </tr>
                                 <tr>
                                     <td className='tdbold'> Email: </td>
-                                    <td> listnature@gmail.com <BiPencil/></td>
+                                    <td> {userCtx.email} <BiPencil/></td>
                                     
                                     
                                 </tr>
                                 <tr>
                                     <td className='tdbold'>Password: </td>
-                                    <td> *************  <BiPencil/></td>
+                                    <td> {userCtx.password}  <BiPencil/></td>
                                     
                                     
                                 </tr>
@@ -62,5 +77,5 @@ const UserDetail = (props) => (
         </div>
     </>
 )
-
-export default UserDetail
+}
+export default UserDetail;
