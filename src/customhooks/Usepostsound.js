@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 
 
-const Usepostdata=(data)=>{
+const Usepostsound=(data)=>{
+
     const [message,setMessage]=useState({});
 
     useEffect(() => {
@@ -11,11 +12,11 @@ const Usepostdata=(data)=>{
           const response = await fetch(data.url,{
             method: "POST",
             headers:{
-              "Content-Type":"application/json ",
-             
+                'Accept': '*/*',
+                
                
             },
-            body: JSON.stringify(data.object),
+            body:data.object,
           });
           const json = await response.json();
          
@@ -26,9 +27,9 @@ const Usepostdata=(data)=>{
         }
     
         fetchProduct();
-      }, [data.url]);
+      }, [data.url,data.object]);
       
      
     return  message;
 }
-export default Usepostdata;
+export default Usepostsound;

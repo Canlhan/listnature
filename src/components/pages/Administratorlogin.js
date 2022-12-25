@@ -1,25 +1,26 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Navigate, useNavigate } from "react-router-dom";
 import Usepostdata from "../../customhooks/Usepostdata";
 import AuthContext from "../../store/auth-content";
 
 const Administratorlogin = () => {
-
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
     
 
    
-    const loginstor=localStorage.getItem("login");
+   
     const navigate=useNavigate();
- 
-    const login=localStorage.getItem("adminlogin");
+   
+    const adminlogin=localStorage.getItem("adminlogin");
+    
     
     const [isauth,setAuth]=useState(true);
    
   
    
     
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  
   
     const authctn=useContext(AuthContext);
   
@@ -35,15 +36,18 @@ const Administratorlogin = () => {
       const result=Usepostdata(addeduser);
 
       console.log(result);
+      useEffect(()=>{
 
-      if(result.success){
-        
+        if(result.success && result.data.roles=="admin"){
+            console.log(result.data);
+           
+            localStorage.setItem("adminlogin",true);
             navigate("/home");
         
        }
-       else{
-              
-       }
+      },[result,addeduser])
+
+      
 
     
 
@@ -58,22 +62,23 @@ const Administratorlogin = () => {
        
        setAuth(false);
         localStorage.setItem("token","admin");
-        localStorage.setItem("adminlogin",true);
+      
         authctn.toke="admin";
         
 
     }
 
-    if(login)
-    {
-      return <Navigate to="/home" replace/>
+    if(adminlogin){
+
+      return <Navigate to="/home"/>
     }
+   
 
   return (
     <>
       <div className=" container  h-100    p-auto  ">
         <div className="row h-25 ">
-          <div className="col text-center  my-auto  "></div>
+          <div className="col text-center  my-auto  "> {!isauth && <h5 style={{color:"white"}}> giriş bilgilernizi kontrol ediniz</h5>}</div>
         </div>
 
         <div className="row w-100 text    m-auto p-auto ">

@@ -25,11 +25,14 @@ const Home = () => {
  
 
   const auth=useContext(AuthContext);
+  const uselogin=localStorage.getItem("login");
+  const adminLogin=localStorage.getItem("adminlogin");
   const isAdmin=localStorage.getItem("token");
   console.log(isAdmin);
 
-    
+    console.log("admin "+adminLogin);
 
+  
   
   return (
     <>
@@ -44,7 +47,7 @@ const Home = () => {
         <div className='row d-flex '>
 
           <div className='col'>
-              <Ringtonecard col={isAdmin=="customer"?2:1}/>
+              <Ringtonecard col={uselogin?1:2} isdownload={uselogin&& true} ring={{id:1,name:'oynama şıkıdım şıkıdım'}}/>
           </div>
           
           {

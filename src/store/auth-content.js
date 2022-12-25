@@ -11,7 +11,8 @@ const AuthContext=React.createContext(
         toke:'',
         isLoggedIn:false,
         login:(token)=>{},
-        logout:()=>{}
+        logout:()=>{},
+        logoutAdmin:()=>{}
 
 
     }
@@ -38,13 +39,18 @@ const AuthContext=React.createContext(
         setToken(null)
         localStorage.removeItem('login');
     }
+    const logoutAdminHandler=()=>{
+
+        localStorage.removeItem("adminlogin");
+    }
 
     const contextValue={
 
         token:token,
         isLoggedIn:userIsLogggedIn ,
         login:loginHandler,
-        logout:logoutHandler  
+        logout:logoutHandler,
+        logoutAdmin:logoutAdminHandler 
 
     }
 

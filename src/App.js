@@ -10,6 +10,7 @@ import Navbar from './components/components/Navbar';
 import Administratorlogin from './components/pages/Administratorlogin';
 import AdminDash from './components/pages/AdminDash';
 import Signup from './components/pages/Signup';
+import Ringdetail from './components/pages/Ringdetail';
 function App() {
   const logincus=localStorage.getItem("login");
   const navigate=useNavigate();
@@ -26,7 +27,7 @@ function App() {
       <Route path='/' element={<Login/>}/>
       <Route path='/adminlogin' element={<Administratorlogin/>}/>
       <Route path="/admindash" element={<AdminDash/>}/>
-     
+      <Route path='/ringdetail/:id' element={<Ringdetail/>}/>
       <Route path='/signup' element={<Signup/>}/>
        
      

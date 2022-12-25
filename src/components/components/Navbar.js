@@ -11,6 +11,8 @@ const Navbar = () => {
 
   const navigate=useNavigate();
   const login=localStorage.getItem("login");
+  const adminlogin=localStorage.getItem("adminlogin");
+
   const userCtx=useContext(UserContext);
 
   const authCtx=useContext(AuthContext);
@@ -24,6 +26,12 @@ const Navbar = () => {
   const gotouserdetails=()=>{
 
     navigate("/account/"+userCtx.id);
+  }
+  const logoutadmin=()=>{
+
+   authCtx.logoutAdmin();
+   navigate("/");
+   
   }
 
   return (
@@ -50,12 +58,12 @@ const Navbar = () => {
             </div>
             <div className='col-4  d-flex justify-content-center '>
                     
-                    { login ? <div className='row   text'>
+                    { login? <div className='row   text'>
                       
                      
                      <div className='col-6 '>
                                   <h6  className='text'>  <Link to="/ownedringtones" className='linkdecoration'>Owned Ringtones </Link></h6>
-                                </div>'
+                                </div>
                       
                      
                      
@@ -69,6 +77,13 @@ const Navbar = () => {
                       
                       
                     </div>:''
+                    }
+
+                    {
+                      adminlogin?   <div className='col'>
+                          
+                      <AiOutlineUser onClick={logoutadmin} size="30px"/>
+                        </div>:''
                     }
                    
 

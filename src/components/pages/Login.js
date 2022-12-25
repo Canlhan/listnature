@@ -10,11 +10,11 @@ const Login = () => {
 
     const usercont=useContext(UserContext);
 
-    const loginstor=localStorage.getItem("login");
+   
     const navigate=useNavigate();
  
     const login=localStorage.getItem("login");
-    
+    const adminlogin=localStorage.getItem("adminlogin");
     const [isauth,setAuth]=useState(true);
    
   
@@ -39,7 +39,7 @@ const Login = () => {
 
       useEffect(()=>{
 
-        if(result.success){
+        if(result.success && result.data.roles=="customer"){
             console.log(result.data);
             usercont.addUser(result.data);
             localStorage.setItem("login",true);
@@ -69,7 +69,7 @@ const Login = () => {
 
     }
 
-    if(login)
+    if(login || adminlogin)
     {
       return <Navigate to="/home" replace/>
     }
