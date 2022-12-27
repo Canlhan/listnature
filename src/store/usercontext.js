@@ -12,7 +12,9 @@ const UserContext=React.createContext(
         password:'',
         email:'',
         roles:'',
-        addUser:(user)=>{}
+        isLogged:false,
+        addUser:(user)=>{},
+        
     }
 );
 
@@ -22,6 +24,7 @@ const UserContext=React.createContext(
    
     const [user,setUser]=useState({id:null,firstName:'',lastName:'',email:'',password:'',roles:'',createdAt:''});
 
+    const[islog,setlog]=useState(false);
    
 
 
@@ -33,6 +36,9 @@ const UserContext=React.createContext(
        
 
     }
+    const loghandler=()=>{
+        setlog(true);
+    }
     
     
    
@@ -43,6 +49,7 @@ const UserContext=React.createContext(
         lastName:user.lastName,
         password:user.password,
         email:user.email,
+        isLogged:islog,
         addUser:addHandler
      
 

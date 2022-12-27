@@ -6,8 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthContextProvider } from './store/auth-content';
 import UserContext, { UserContextProvider } from './store/usercontext';
+import { ProductContextProvider } from './store/productcontext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+    
+    <ProductContextProvider>
+
+   
     <UserContextProvider>
 
     
@@ -20,6 +25,7 @@ root.render(
     </AuthContextProvider>
 
     </UserContextProvider>
+    </ProductContextProvider>
   
   
 );

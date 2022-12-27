@@ -1,12 +1,55 @@
 
 
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ReactAudioPlayer from 'react-audio-player';
 import cle from '../../assets/cleopatra_be.mp3'
 import { BiMusic } from "react-icons/bi"
-const Ringdetail = () => {
+import Usefetchdata from '../../customhooks/Usefetchdata';
+import { useNavigate, useParams } from 'react-router-dom';
+import productContext from '../../store/productcontext';
+const Ringdetail = (props) => {
+
+  
+    const navigate=useNavigate();
+    const param=useParams();
+
+    const[downlo,setDown]=useState(false);
+    const productctx=useContext(productContext);
+
+    
 
 
+    
+    
+    
+    useEffect(()=>{
+
+        productctx.getproductdetail(param.id);
+        productctx.getproducts(param.id);
+        
+    },[])
+
+
+
+    const detailson=productctx.detailsound;
+    const product=productctx.product;
+    console.log(product.userId);
+    useEffect(()=>{
+
+        if(product.userId != 0){
+            console.log("userıd o değil")
+            console.log("proooo: "+JSON.stringify(product));
+            setDown(true);
+        }
+    },[product])
+    
+    const SOUND_BASE_URL="https://localhost:44374/"
+    
+    const gotopayment=()=>{
+        localStorage.setItem("soundId",param.id);
+        productctx.addownprodudc(param.id);
+        navigate("/payment");
+    }
   return (
     <>
     <div className='container colorwhite'>   
@@ -18,10 +61,10 @@ const Ringdetail = () => {
                 <div className='col-10'>
 
                 <div>
-                    <h4> oynama şıkıdım şıkıdım </h4>
+                    <h4>{detailson.name} </h4>
                 </div>
                     <div className='d-flex '>
-                        <p> ring tone detail</p>
+                        <p> {detailson.description}</p>
                         
                       
                     </div>
@@ -33,10 +76,19 @@ const Ringdetail = () => {
 
             <div className='row   w-25   mt-5 '>
 
-            <ReactAudioPlayer
-                        src="https://localhost:44374/uploads/daa4e1fd-cd13-4d2c-a88f-bb577a286055.mp3"
-                        controls
-                        />
+                {
+                    product.userId !=0 ? <ReactAudioPlayer
+                    src={`${SOUND_BASE_URL}${detailson.soundPath}`}
+                    controls
+                    
+                    /> :
+                    <ReactAudioPlayer
+                    src={`${SOUND_BASE_URL}${detailson.soundPath}`}
+                    controls
+                    controlsList='nodownload'
+                    />
+                }
+            
                
                 
             </div>
@@ -49,7 +101,7 @@ const Ringdetail = () => {
         
                 <div className='col-10'>
 
-                    <button className='downloadbtn' style={{backgroundColor:'#2424A3'}}> Purchase</button>
+                    <button className='downloadbtn' style={{backgroundColor:'#2424A3'}} onClick={gotopayment}> Purchase</button>
 
                 </div>
             </div>

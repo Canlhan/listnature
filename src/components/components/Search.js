@@ -2,6 +2,12 @@ import React from 'react'
 import { BiSearch } from "react-icons/bi";
 const Search = () => {
 
+  
+
+  const whenwrite=(e)=>{
+
+  }
+
   return (
 
     <>
@@ -11,7 +17,7 @@ const Search = () => {
             <div className='logo'>
                 <BiSearch size={30}/>
             </div>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Search the ring tone...."/>
+          <input type="password" onChange={whenwrite} class="form-control" id="exampleInputPassword1" placeholder="Search the ring tone...."/>
           </div>
           
           </div>

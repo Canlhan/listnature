@@ -13,6 +13,7 @@ const Usefetchdata=(url)=>{
           setProducts(json.data);
         }
     
+        console.log("fetch içindeki prod"+products)
         fetchProduct();
       }, [url]);
       

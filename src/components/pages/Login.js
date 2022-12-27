@@ -43,6 +43,8 @@ const Login = () => {
             console.log(result.data);
             usercont.addUser(result.data);
             localStorage.setItem("login",true);
+            console.log(result.data.id);
+            localStorage.setItem("customerId",result.data.id);
             navigate("/home");
         
        }

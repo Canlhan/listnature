@@ -1,6 +1,6 @@
 
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BsFillPlayBtnFill } from "react-icons/bs";
 import { Link, useNavigate, NavLink } from 'react-router-dom';
 import { AiOutlineUser } from "react-icons/ai";
@@ -12,8 +12,23 @@ const Navbar = () => {
   const navigate=useNavigate();
   const login=localStorage.getItem("login");
   const adminlogin=localStorage.getItem("adminlogin");
-
   const userCtx=useContext(UserContext);
+  
+  const customerid=localStorage.getItem("customerId");
+
+  const getuser= async ()=>{
+
+    const result= await fetch(`https://localhost:44374/api/users/${customerid}`)
+    const resultjson=await result.json();
+
+    userCtx.addUser(resultjson.data);
+
+  }
+  useEffect(()=>{
+
+    getuser();
+  },[customerid])
+ 
 
   const authCtx=useContext(AuthContext);
 
@@ -34,6 +49,7 @@ const Navbar = () => {
    
   }
 
+  
   return (
 
     <>
@@ -58,11 +74,11 @@ const Navbar = () => {
             </div>
             <div className='col-4  d-flex justify-content-center '>
                     
-                    { login? <div className='row   text'>
+                    { login ? <div className='row   text'>
                       
                      
                      <div className='col-6 '>
-                                  <h6  className='text'>  <Link to="/ownedringtones" className='linkdecoration'>Owned Ringtones </Link></h6>
+                                  <h6  className='text'>  <Link to="/owned" className='linkdecoration'>Owned Ringtones </Link></h6>
                                 </div>
                       
                      

@@ -11,6 +11,7 @@ import Administratorlogin from './components/pages/Administratorlogin';
 import AdminDash from './components/pages/AdminDash';
 import Signup from './components/pages/Signup';
 import Ringdetail from './components/pages/Ringdetail';
+import Payment from './components/pages/Payment';
 function App() {
   const logincus=localStorage.getItem("login");
   const navigate=useNavigate();
@@ -21,14 +22,19 @@ function App() {
    <div className='home overflow-hidden'>
     <Routes>
 
-      <Route path='/home' element={<Home/>}/>
-      <Route path='/ownedringtones' element={<OwnedRingtones/>}/>
-      <Route path='/account/:id' element={<UserDetail/>}/>
-      <Route path='/' element={<Login/>}/>
-      <Route path='/adminlogin' element={<Administratorlogin/>}/>
-      <Route path="/admindash" element={<AdminDash/>}/>
-      <Route path='/ringdetail/:id' element={<Ringdetail/>}/>
-      <Route path='/signup' element={<Signup/>}/>
+
+    <Route path='/home' element={<Home/>}/>
+    <Route path='/owned' element={<OwnedRingtones/>}/>
+    <Route path='/account/:id' element={<UserDetail/>}/>
+    <Route path='/' element={<Login/>}/>
+    <Route path='/adminlogin' element={<Administratorlogin/>}/>
+    <Route path="/admindash" element={<AdminDash/>}/>
+    <Route path='/ringdetail/:id' element={<Ringdetail/>}/>
+    <Route path='/signup' element={<Signup/>}/>
+    */
+
+    <Route path="/payment" element={<Payment/>}/>
+    
        
      
      

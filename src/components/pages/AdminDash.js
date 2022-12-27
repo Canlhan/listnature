@@ -2,83 +2,153 @@
 
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import Usefetchdata from '../../customhooks/Usefetchdata';
 import Usepostdata from '../../customhooks/Usepostdata';
 import Usepostsound from '../../customhooks/Usepostsound';
 
 
-const AdminDash = () => {
+const AdminDash = (props) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     
-    const [product,setProduct]=useState({url:'',object:{}})
-    const[ringtone,setRingtone]=useState({url:'',object:{}});
+    const [product,setProduct]=useState()
     const[sound,setSoundfile]=useState();
+    const[cameproduct,setCaemeproduct]=useState();
+    
+    const[file,setFile]=useState();
+    
+    const formdata=new FormData();
+  
+
+    console.log("admindashe girdi")
+   
+   const getproducts=async ()=>{
+
+    const result= await fetch("https://localhost:44374/api/products/getall",{
+            
+        method: "GET",
+       
+            }).then((response)=>{
+                    console.log(response);
+            })
+    
+            console.log(result);
+   
+   
+    return result;
+   }
+
+
 
     
+    
 
-    const uploadfile=async (data)=>{
+   const uploadfile=async (data)=>{
 
-        const result= await fetch("https://localhost:44374/api/ringtones/add",{
-            
-                method: "POST",
-                headers:{
-                    'Accept': '*/*',
-                    
-                   
-                },
-                body:data
-        }).then((response)=>{
-            console.log(response);
-        })
-    }
+    console.log("********************UPLOAD FİLE ÇALIŞTIIIIIIS*********************")
+    const result= await fetch("https://localhost:44374/api/ringtones/add",{
+        
+            method: "POST",
+            headers:{
+                'Accept': '*/*',
+                
+               
+            },
+            body:data
+    }).then((response)=>{
+        
+    })
+   
+    
+    console.log("********************UPLOAD FİLE ÇALIŞTIIIIII*********************")
+}
    
     const addproduct=async (product)=>{
-
-        const url="https://localhost:44374/api/Products/add";
+        console.log("********************ADD PRODUCT ÇALIŞTIII*********************")
+        const url="https://localhost:44374/api/products/add";
         const result =await fetch(url,{
             method:'POST',
             headers:{
-                'Content-type':'applicaiton/json'
+                'Content-type':'application/json'
             },
             body:JSON.stringify(product)
-        }).then((response)=>{
-            console.log("products result : "+response);
-        })
+        });
+        const json=await result.json();
+        console.log(json.data.id);
+        setCaemeproduct(json.data.id);
+       
+        console.log("********************ADD PRODUCT ÇALIŞTIII*********************")
+        return json.data.id;
+        
     }
 
-    const[file,setFile]=useState();
     
 
     const fileinput=(e)=>{
-
-        
-        const formdata=new FormData();
-       
-        formdata.append('ringtone',file);
-        formdata.append('id',1010);
-        setFile(e.target.files[0]);
-        setSoundfile(formdata);
-        console.log(sound);
+        setFile(e.target.files[0]); 
         
     }
 
+    
     
    
     
     const onsubmit=(data)=>{
 
-
-        console.log("sound: "+sound);
-        addproduct({...data,userId:1});
-        uploadfile(sound);
+        console.log("submite basıldı")
+       
+    
+       
+        console.log(data);
+        setProduct({...data,userId:0})
+        
+        
+        
+      
+        
+        
+        props.trigger();
         
        
-        
-        
        
         
 
     }
+console.log("file yüklendi: "+file);
+
+    useEffect(()=>{
+        console.log("formdata sounda yüklendi")
+        if(cameproduct!==undefined){
+            console.log("product undefined değil ve formdataya append olacak ")
+            formdata.append('ringtone',file);
+            console.log("product ID: "+cameproduct);
+            
+            formdata.append('id',cameproduct);
+            setSoundfile(formdata);
+        }
+        
+        
+    },[cameproduct,product])
+
+    useEffect(()=>{
+        
+        console.log("cama: "+cameproduct);
+        uploadfile(sound)
+    },[cameproduct,sound])
+
+    
+    useEffect(()=>{
+
+        console.log("product yollancak ")
+        if(product!==undefined){
+            console.log("product undefined değil gigidcek gibi ")
+            addproduct(product);
+            setProduct(undefined);
+        }
+       
+        
+    },[product])
   
+    
     
 
     
@@ -103,7 +173,7 @@ const AdminDash = () => {
     }
   return (
     <>
-        <div className='col-5 colorwhite mt-5' >
+        <div className='col-5 colorwhite mt-5 ' >
 
             <div className='row' >
                 

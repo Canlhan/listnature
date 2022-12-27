@@ -20,19 +20,59 @@
     align-items: center;
     justify-content: center;
 }
+.labe{
+    
+}
+.rightto{
+    text-align: right;
+    right:0px;
+   
+    width: 100%;
+}
+.centertext{
+    text-align: center;
+}
 .loginbtn{
     margin-top: 10px;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.downloadbtn{
+    border-radius: 25px;
+    background-color: rgb(175, 198, 205);
+    width: 10.5rem;
+    color: white;
+    margin-bottom: 25px;
+    margin-top: 25px;
+   
+    
 }
 .colorwhite{
     color:white;
 }
 .overflowhidden{
-    overflow: auto;
-    overflow-x: hidden;
+    overflow-y: visible;
+    height: 100vh;
+    
+}
+.ringdash{
+    height: 100vh;
 }
 
+.overflowring{
+    
+    height: 100%;
+    
+    overflow:auto;
+    
+}
 .logo{
     margin-right: 5px;
     align-items: center;
@@ -40,13 +80,7 @@
     display: flex;
 }
 
-.downloadbtn{
-    border-radius: 25px;
-    background-color: rgb(175, 198, 205);
-    width: 10.5rem;
-    color: white;
-    
-}
+
 .downloadbtn:hover{
     background-color: aliceblue;
 }

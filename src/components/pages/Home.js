@@ -1,6 +1,6 @@
 
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Login from './Login'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -17,22 +17,40 @@ import Navbar from '../components/Navbar';
 import AdminDash from './AdminDash';
 import AuthContext from '../../store/auth-content';
 import { Navigate } from 'react-router-dom';
+import productContext from '../../store/productcontext';
+import Usepostdata from '../../customhooks/Usepostdata';
+import Usefetchdata from '../../customhooks/Usefetchdata';
 
 
 
 const Home = () => {
 
  
-
+  const [trigger,setrigger]=useState(false);
   const auth=useContext(AuthContext);
   const uselogin=localStorage.getItem("login");
   const adminLogin=localStorage.getItem("adminlogin");
   const isAdmin=localStorage.getItem("token");
-  console.log(isAdmin);
+
+
+  const productContexts=useContext(productContext);
+  const[producst,setProducts]=useState(productContexts.products);
+
+  const product=Usefetchdata("https://localhost:44374/api/products/getall")
+
+  console.log("ana sayfa girdi ")
+ 
+  console.log(uselogin);
 
     console.log("admin "+adminLogin);
 
   
+  const getproduct=()=>{
+    
+    setrigger(!trigger);
+
+  }
+
   
   return (
     <>
@@ -44,14 +62,20 @@ const Home = () => {
        
           <Search/>
 
-        <div className='row d-flex '>
+        <div className='row d-flex  '>
 
-          <div className='col'>
-              <Ringtonecard col={uselogin?1:2} isdownload={uselogin&& true} ring={{id:1,name:'oynama şıkıdım şıkıdım'}}/>
+          <div className='col ringdash   overflow-scroll'>
+            {
+              product.map((product)=>{
+                console.log("product map: "+product.id);
+                return <Ringtonecard col={uselogin?1:2} key={product.id} trigger={getproduct} isdownload={uselogin&& true} admin={adminLogin} ring={product}/>
+              })
+            }
+              
           </div>
           
           {
-              isAdmin=="admin" && <AdminDash/>
+              isAdmin=="admin" && <AdminDash trigger={getproduct}/>
           }
         </div>
           
