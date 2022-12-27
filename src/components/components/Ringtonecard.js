@@ -13,7 +13,7 @@ const Ringtonecard = (props) => {
   const navigate=useNavigate();
  const productcontx=useContext(productContext);
   const[bol,setbol]=useState(undefined); 
-  
+
   const gotoringdetail=()=>{
 
     navigate(`/ringdetail/${props.ring.id}`)
@@ -72,7 +72,7 @@ const Ringtonecard = (props) => {
                            <h4> {props.ring.name}</h4>
                       </div>
                         <div className='d-flex justify-content-between'>
-                            <p> ring tone detail</p>
+                            <p> {props.ring.description}</p>
 
                             {/**
                              * props.isdownload && <button className='downloadbtn'> Download</button>

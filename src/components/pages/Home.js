@@ -35,9 +35,18 @@ const Home = () => {
 
   const productContexts=useContext(productContext);
   const[producst,setProducts]=useState(productContexts.products);
-
+  const[filtered,setfilter]=useState([]);
   const product=Usefetchdata("https://localhost:44374/api/products/getall")
+    useEffect(()=>{
 
+      setfilter(product);
+
+    },[product])
+  
+    const filterproducts=(product)=>{
+
+      setfilter(product);
+    }
   console.log("ana sayfa girdi ")
  
   console.log(uselogin);
@@ -60,13 +69,13 @@ const Home = () => {
 
       <div className='container '>
        
-          <Search/>
+          <Search produc={product} filter={filterproducts}/>
 
         <div className='row d-flex  '>
 
           <div className='col ringdash   overflow-scroll'>
             {
-              product.map((product)=>{
+              filtered.map((product)=>{
                 console.log("product map: "+product.id);
                 return <Ringtonecard col={uselogin?1:2} key={product.id} trigger={getproduct} isdownload={uselogin&& true} admin={adminLogin} ring={product}/>
               })
