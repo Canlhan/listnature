@@ -73,7 +73,7 @@ const Home = () => {
 
         <div className='row d-flex  '>
 
-          <div className='col ringdash   overflow-scroll'>
+          <div className='col ringdash    overflow-auto '>
             {
               filtered.map((product)=>{
                 console.log("product map: "+product.id);

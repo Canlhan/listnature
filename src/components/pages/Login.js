@@ -97,7 +97,7 @@ const Login = () => {
                     <form className='w-25 ' onSubmit={handleSubmit(onsubmit)}>
                                 <div class="form-group ">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+                                    <input type="email" class="form-control" autocomplete="off" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
                                      {...register("email")}/>
                                 
                                 </div>

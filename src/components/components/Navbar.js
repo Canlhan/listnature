@@ -15,13 +15,17 @@ const Navbar = () => {
   const userCtx=useContext(UserContext);
   
   const customerid=localStorage.getItem("customerId");
-
+  console.log(customerid);
   const getuser= async ()=>{
 
     const result= await fetch(`https://localhost:44374/api/users/${customerid}`)
     const resultjson=await result.json();
 
-    userCtx.addUser(resultjson.data);
+    console.log("customer: "+result);
+    if(resultjson.data!=null){
+         userCtx.addUser(resultjson.data);
+    }
+       
 
   }
   useEffect(()=>{
@@ -35,6 +39,7 @@ const Navbar = () => {
   const logout=()=>{
 
     authCtx.logout();
+   
     
     navigate("/");
   }
@@ -45,6 +50,7 @@ const Navbar = () => {
   const logoutadmin=()=>{
 
    authCtx.logoutAdmin();
+   
    navigate("/");
    
   }
@@ -63,7 +69,7 @@ const Navbar = () => {
                       <h5><BsFillPlayBtnFill color="white" size="30px"/> </h5>
                   </div>
                   <div className='col justify-content '>
-                       <h5 > <Link to="/home" className='linkdecoration'> listnature </Link>  </h5>
+                       <h5 > <Link to="/home" className='linkdecoration'> listenature </Link>  </h5>
                   </div>
               </div>
                    

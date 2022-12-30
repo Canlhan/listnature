@@ -57,7 +57,7 @@ const Ringtonecard = (props) => {
 
   return (
     <>
-        <div className='row colorwhite login mt-5  ' >
+        <div className='row colorwhite   login mt-3   ' >
           
           <div className='col-8 '>
                 

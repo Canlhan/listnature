@@ -88,6 +88,7 @@ const Administratorlogin = () => {
                 <label for="exampleInputEmail1">Email address</label>
                 <input
                   type="email"
+                  autocomplete="off"
                   class="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
@@ -100,6 +101,7 @@ const Administratorlogin = () => {
                 <input
                   type="password"
                   class="form-control"
+                  autocomplete="off"
                   id="exampleInputPassword1"
                   placeholder="Password"
                   {...register("password")}

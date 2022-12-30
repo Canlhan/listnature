@@ -31,7 +31,9 @@ const Signup = () => {
   
   
    if(result){
-      navigate("/home");
+
+      navigate("/");
+
      }
    
   
@@ -56,7 +58,7 @@ const Signup = () => {
     }
     if(login)
     {
-      return <Navigate to="/home" replace/>
+      return <Navigate to="/" replace/>
     }
 
 

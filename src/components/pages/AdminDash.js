@@ -186,13 +186,13 @@ console.log("file yüklendi: "+file);
                     <div class="form-group ">
                                     <label for="exampleInputEmail1">Ringtone Name</label>
                                     <input style={{height:"30px",width:"70%"}} type="text"
-                          class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" {...register("name")} placeholder="Enter email"/>
+                          class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off" {...register("name")} placeholder="Enter name"/>
                                 
                     </div>
                     <div class="form-group">
                                     <label for="exampleInputPassword1">Ringtone Explanation</label>
                                     <input style={{height:"30px",width:"70%"}} type="text" class="form-control mt-2"
-                                     id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter description"
+                                     id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off" placeholder="Enter description"
                                      {...register("description")}/>
                     </div>
                             
@@ -200,7 +200,7 @@ console.log("file yüklendi: "+file);
                     <div class="form-group ">
                                     <label for="exampleInputEmail1">Price</label>
                                     <input style={{height:"30px",width:"70%"}} type="number"
-                          class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" {...register("price")} placeholder="enter price"/>
+                          class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  autocomplete="off" {...register("price")} placeholder="enter price"/>
                                 
                     </div>
                     <div className='loginbtn '>

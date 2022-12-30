@@ -21,7 +21,7 @@ const inputref=useRef();
             <div className='logo'>
                 <BiSearch size={30}/>
             </div>
-          <input type="text" ref={inputref} onChange={whenwrite}  class="form-control" id="exampleInputPassword1" placeholder="Search the ring tone...."/>
+          <input type="text" ref={inputref} onChange={whenwrite}  autocomplete="off" class="form-control" id="exampleInputPassword1" placeholder="Search the ring tone...."/>
           </div>
           
           </div>

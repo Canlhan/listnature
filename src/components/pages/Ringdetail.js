@@ -9,7 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import productContext from '../../store/productcontext';
 const Ringdetail = (props) => {
 
-  
+  const cusomerId=localStorage.getItem("customerId");
     const navigate=useNavigate();
     const param=useParams();
 
@@ -36,8 +36,9 @@ const Ringdetail = (props) => {
     console.log(product.userId);
     useEffect(()=>{
 
-        if(product.userId != 0){
+        if(product.userId ==cusomerId ){
             console.log("userıd o değil")
+            console.log("customer: "+cusomerId);
             console.log("proooo: "+JSON.stringify(product));
             setDown(true);
         }
@@ -77,7 +78,7 @@ const Ringdetail = (props) => {
             <div className='row   w-25   mt-5 '>
 
                 {
-                    product.userId !=0 ? <ReactAudioPlayer
+                    product.userId ==cusomerId? <ReactAudioPlayer
                     src={`${SOUND_BASE_URL}${detailson.soundPath}`}
                     controls
                     
