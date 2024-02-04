@@ -96,15 +96,8 @@ const AdminDash = (props) => {
 
         console.log("submite basıldı")
        
-    
-       
         console.log(data);
         setProduct({...data,userId:0})
-        
-        
-        
-      
-        
         
         props.trigger();
         
